@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+
+{% block title %}Articles{% endblock %}
+{% block otherHead %} {% endblock %}
+
+
+{% block main %}
+
+	<!-- main -->
+	<div class="ui column grid Content">
+		<div class="two wide column"></div>
+		<div class="twelve wide column">
+			<div class="ui raised segment Main">
+				<h1>This is Title</h1>
+				<div class="Info">
+					<span><i class="calendar icon"></i>2017-10-10&nbsp&nbsp</span>
+					<span><i class="unhide icon"></i>10 &nbsp&nbsp</span>
+					<span><i class="comments outline icon"></i>10</span>
+				</div>
+			  	<p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.</p>
+			  	<div class="ui divider"></div>
+			  	<div class="PageEndButton">
+			  		<button class="ui left floated button"><i class="reply icon"></i>回到主页</button>
+			  		<button class="ui right floated button"><i class="share alternate icon"></i>分享</button>
+			  	</div>
+			  	
+			</div>
+			<!-- 评论 -->
+			  	<div class="ui comments" id="comments">
+			  		<div class="comment" v-for="(comment, index) in comments">
+					    <a class="avatar">
+					        <img src="../static/img/head.jpg">
+					    </a>
+					    <div class="content">
+					        <a class="author">${comment.author}$</a>
+					      	<div class="metadata">
+					        	<div class="date">${comment.date}$</div>
+					      	</div>
+					      	<div class="text">
+					        	${comment.content}$
+					      	</div>
+					      	<div class="actions">
+					        	<a href="#newComment" class="reply" v-on:click="reply(index)">Reply</a>
+					      	</div>
+					    </div>
+					</div>
+					<form class="ui reply form">
+					    <div class="field" id="newComment">
+					       <textarea v-model="newComment.content"></textarea>
+					    </div>
+					    <div class="ui primary submit labeled icon button" v-on:click="addComment"><i class="icon edit"></i> Add Comment </div>
+					</form>
+			  	</div>
+			  	<!-- end-->
+		</div>
+	</div>
+{% endblock %}
+
+
+{% block scripts %}
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$('.ui.dropdown.item').dropdown();
+		})
+	</script>
+	<script type="text/javascript">
+
+		var app = new Vue({
+			delimiters: ['${', '}$'],
+			el: '#comments',
+			ready: function(){
+				this.comments.push({author: 'zheng5', date: '2017-10-13', content: 'fourth comment'});
+				alert('123');
+			},
+			data: {
+				newComment:{
+					author: 'new', date: '2017-10-15', content: ''
+				},
+			    comments: [
+			    	{author: 'zheng1', date: '2017-10-10', content: 'first comment'},
+			    	{author: 'zheng2', date: '2017-10-11', content: 'second comment'},
+			    	{author: 'zheng3', date: '2017-10-12', content: 'third comment'},
+			    	{author: 'zheng4', date: '2017-10-13', content: 'fourth comment'}
+			    ]
+			},
+			methods: {
+				reply: function(index){
+					this.newComment.content = '@'+this.comments[index].author;
+				},
+				addComment: function(){
+					this.comments.push(this.newComment);
+					this.newComment = {author: 'new', date: '2017-10-15', content: ''};
+				}
+			}
+
+		})
+	</script>
+{% endblock %}

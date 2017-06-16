@@ -1,0 +1,152 @@
+/*欢迎页页面*/
+.homePage{
+	margin: 0;
+	min-height: 300px;
+	background: url("../img/background.jpg");
+	background-size: cover;
+	background-repeat: no-repeat;
+}
+
+.firstHeader{
+	position: absolute;
+	top: 30%;
+	left: 50%;
+	transform: translate(-50%,-50%);
+}
+
+.secondHeader{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%,-50%);
+}
+
+.enterLink{
+	position: absolute;
+	top: 75%;
+	left: 50%;
+	transform: translate(-50%,-50%);
+}
+
+.ui.circular.icon.orange.basic.button{
+	width: 90px;
+	height: 90px;
+	text-align: center;
+	font-size: 25px;
+}
+/* 欢迎页结束 */
+
+
+
+/* main */
+
+.header{
+	padding-top: 0px;
+	margin-top: 0px;
+	position: relative;
+	background: url("../img/header.jpg");
+	background-size: cover;
+	background-repeat: no-repeat;
+	height: 200px;
+}
+.headerImg{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%,-50%);
+}
+
+.ui.blue.inverted.secondary.menu.Nav{
+	height: 50px;
+	padding: 0px;
+	margin: 0px;
+	font-size: 15px;
+}
+
+.ui.avatar.image.head{
+	width: 40px;
+	height: 40px;
+}
+
+.ui.column.grid.Content{
+	margin-top: 50px;
+}
+
+.eight.wide.column{
+}
+
+.ui.vertical.menu.Category{
+	width:200px;
+	margin-top: 80px;
+}
+
+.categoryTitle{
+	text-align: center;
+	padding-top: 20px;
+	padding-bottom: 20px;
+}
+
+.postTime.Time{
+	color: grey;
+	margin-top: 0px;
+}
+
+.ui.piled.segment p{
+	font-size: 15px;
+}
+
+.ui.blue.right.floated.button.ReadMore{
+	margin-top: -5px;
+}
+
+.row.Paging{
+	text-align: center;
+}
+
+.row.Paging .ui.green.button{
+	margin-top: -25px;
+}
+
+.PageNumber{
+	color: green;
+	font-size: 20px;
+}
+
+.Footer{
+	margin-top: 40px;
+	height: 200px;
+	width: 100%;
+	background-color: black;
+}
+
+/* articlepage*/
+.ui.raised.segment.Main{
+	padding-left: 60px;
+	padding-right: 60px;
+	padding-top: 30px;
+}
+.ui.raised.segment.Main h1{
+	text-align: center;
+	font-size: 40px;
+}
+.ui.raised.segment.Main p{
+	font-size: 18px;
+	text-align: justify;
+}
+
+.Info{
+	width: 100%;
+	text-align: center;
+	background-color: grey;
+	color: white;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	margin-bottom: 20px;
+}
+.Info span{
+	width:20%;
+}
+
+.PageEndButton{
+	padding-bottom: 30px;
+}

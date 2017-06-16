@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{% block title %}Articles{% endblock %}
+{% block otherHead %} {% endblock %}
+
+
+{% block main %}
+
+	<!-- content -->
+	<div class="ui column grid Content">
+		<div class="two wide column"></div>
+		<div class="nine wide column">
+			<!--article list-->
+			<div class="ui piled segment">
+				<h1 class="title"><a href="#">A header</a></h1>
+				<h5 class="postTime Time"><i class="calendar icon"></i>2017-10-17</h5>
+				<p>Te eum doming eirmod, nominati pertinacia argumentum ad his. Ex eam alia facete scriptorem, est autem aliquip detraxit at. Usu ocurreret referrentur at, cu epicurei appellantur vix. Cum ea laoreet recteque electram, eos choro alterum definiebas in. Vim dolorum definiebas an. Mei ex natum rebum iisque.</p>
+				<p>Audiam quaerendum eu sea, pro omittam definiebas ex. Te est latine definitiones. Quot wisi nulla ex duo. Vis sint solet expetenda ne, his te phaedrum referrentur consectetuer. Id vix fabulas oporteat, ei quo vide phaedrum, vim vivendum maiestatis in.</p>
+				<div class="ui divider"></div>
+				<a class="ui teal tag label">Fe</a>
+				<a class="ui teal tag label">Fea</a>
+				<button class="ui blue right floated button ReadMore">阅读更多...</button>
+			</div>
+			<!--article list end-->
+
+			<!--paging-->
+
+				<div class="ui column grid">
+					<div class="row Paging">
+						<div class="four wide column">
+							<button class="ui green button"><i class="left arrow icon"></i></button>
+						</div>
+						<div class="eight wide column">
+							<span class="PageNumber">1/5</span>
+						</div>
+						<div class="four wide column">
+							<button class="ui green button"><i class="right arrow icon"></i></button>
+						</div>
+					</div>
+				</div>
+			
+			<!--paging end-->
+		</div>
+
+		<!--category-->
+		<div class="one wide column"></div>
+		<div class="three wide column">
+			<div class="ui vertical menu Category">
+				<div class="categoryTitle">
+					<h2><i class="blue remove bookmark icon"></i>分类</h2>
+				</div>
+				<a class="teal item"><b>Inbox</b><span class="ui teal left pointing label">1</span></a>
+				<a class="teal item"><b>Inbox</b><span class="ui teal left pointing label">1</span></a>
+				<a class="teal item"><b>Inbox</b><span class="ui teal left pointing label">1</span></a>
+				<a class="teal item"><b>Inbox</b><span class="ui teal left pointing label">1</span></a>
+			</div>
+		</div>
+		<div class="one wide column"></div>
+		<!--category end-->
+
+	</div>
+	<!-- content end-->
+
+{% endblock %}
+
+
+
+{% block scripts %}
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$('.ui.dropdown.item').dropdown();
+		})
+	</script>
+{% endblock %}

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>{% block title %}My Blog{% endblock %}</title>
+		{% block otherHead %} {% endblock %}
+		<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/semantic.css')}}">
+		<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/myStyle.css')}}">
+		<script src="https://cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+		<script src="{{url_for('static', filename='js/semantic.min.js')}}"></script>
+		<script src="https://unpkg.com/vue/dist/vue.js"></script>
+	</head>
+
+	<body>
+		<!-- header-->
+		<div class="header">
+			<div class="headerImg">
+				<img src="{{url_for('static', filename='img/mainHeader.png')}}">
+			</div>
+		</div>
+		<!-- header end-->
+
+		<!-- nav -->
+		<div class="ui blue inverted secondary menu Nav">
+			<a class="active item">Home </a>
+  			<a class="item">Messages </a>
+  			<a class="item">Friends </a>
+  			<div class="right menu">
+  				<div class="item">
+			      	<div class="ui icon input">
+			        	<input type="text" placeholder="Search...">
+			        	<i class="search link icon"></i>
+			      	</div>
+    			</div>
+    			<div class="item">
+    				<img class="ui avatar image head" src="{{url_for('static', filename='img/head.jpg')}}">
+    			
+
+				<div class="ui dropdown item">Admin<i class="dropdown icon"></i>
+				    <div class="menu">
+				      	<div class="item"> 退出 <i class="sign out icon"></i></div>
+				      	<div class="item"> 注销</div>
+				    </div>
+				</div>
+
+    			</div>
+  			</div>
+		</div>
+		<!-- nav end-->
+
+		<!-- main -->
+		{% block main %}
+
+		{% endblock %}
+
+		
+
+		<!--footer-->
+		<div class="Footer">
+
+		</div>
+		<!--footer end-->
+
+	
+		{% block scripts %}
+			<script type="text/javascript">
+			$(document).ready(function(){
+				$('.ui.dropdown.item').dropdown();
+			})
+		</script>
+		{% endblock %}
+	
+	</body>
+
+</html>
