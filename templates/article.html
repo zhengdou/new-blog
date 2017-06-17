@@ -63,34 +63,38 @@
 			$('.ui.dropdown.item').dropdown();
 		})
 	</script>
+	
 	<script type="text/javascript">
 
 		var app = new Vue({
 			delimiters: ['${', '}$'],
 			el: '#comments',
-			ready: function(){
-				this.comments.push({author: 'zheng5', date: '2017-10-13', content: 'fourth comment'});
-				alert('123');
-			},
 			data: {
 				newComment:{
 					author: 'new', date: '2017-10-15', content: ''
 				},
-			    comments: [
-			    	{author: 'zheng1', date: '2017-10-10', content: 'first comment'},
-			    	{author: 'zheng2', date: '2017-10-11', content: 'second comment'},
-			    	{author: 'zheng3', date: '2017-10-12', content: 'third comment'},
-			    	{author: 'zheng4', date: '2017-10-13', content: 'fourth comment'}
-			    ]
+			    comments: [],
+			    test: [],
 			},
 			methods: {
 				reply: function(index){
-					this.newComment.content = '@'+this.comments[index].author;
+					this.newComment.content = '@'+this.comments[index].author
 				},
 				addComment: function(){
-					this.comments.push(this.newComment);
-					this.newComment = {author: 'new', date: '2017-10-15', content: ''};
+					this.comments.push(this.newComment)
+					this.newComment = {author: 'new', date: '2017-10-15', content: ''}
+				},
+				getData: function(){
+					this.comments = [
+						{author: 'zheng1', date: '2017-10-10', content: 'first comment'},
+				    	{author: 'zheng2', date: '2017-10-11', content: 'second comment'},
+				    	{author: 'zheng3', date: '2017-10-12', content: 'third comment'},
+				    	{author: 'zheng4', date: '2017-10-13', content: 'fourth comment'}
+					]
 				}
+			},
+			mounted: function(){
+				this.getData()
 			}
 
 		})
