@@ -9,6 +9,7 @@
 		<script src="https://cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 		<script src="{{url_for('static', filename='js/semantic.min.js')}}"></script>
 		<script src="https://unpkg.com/vue/dist/vue.js"></script>
+		<script src="//cdn.bootcss.com/reqwest/2.0.5/reqwest.js"></script>
 	</head>
 
 	<body>
@@ -21,6 +22,7 @@
 		<!-- header end-->
 
 		<!-- nav -->
+		<div class="ui sticky" id="nav">
 		<div class="ui blue inverted secondary menu Nav">
 			<a class="active item">Home </a>
   			<a class="item">Messages </a>
@@ -46,6 +48,7 @@
     			</div>
   			</div>
 		</div>
+		</div>
 		<!-- nav end-->
 
 		<!-- main -->
@@ -62,13 +65,17 @@
 		<!--footer end-->
 
 	
-		{% block scripts %}
-			<script type="text/javascript">
+		
+		<script type="text/javascript">
 			$(document).ready(function(){
 				$('.ui.dropdown.item').dropdown();
+				$('.ui.sticky').sticky({
+					context: '#nav'
+				});
 			})
+			
 		</script>
-		{% endblock %}
+		{% block scripts %}{% endblock %}
 	
 	</body>
 

@@ -10,18 +10,20 @@
 	<div class="ui column grid Content">
 		<div class="two wide column"></div>
 		<div class="nine wide column">
-			<!--article list-->
-			<div class="ui piled segment">
-				<h1 class="title"><a href="#">A header</a></h1>
-				<h5 class="postTime Time"><i class="calendar icon"></i>2017-10-17</h5>
-				<p>Te eum doming eirmod, nominati pertinacia argumentum ad his. Ex eam alia facete scriptorem, est autem aliquip detraxit at. Usu ocurreret referrentur at, cu epicurei appellantur vix. Cum ea laoreet recteque electram, eos choro alterum definiebas in. Vim dolorum definiebas an. Mei ex natum rebum iisque.</p>
-				<p>Audiam quaerendum eu sea, pro omittam definiebas ex. Te est latine definitiones. Quot wisi nulla ex duo. Vis sint solet expetenda ne, his te phaedrum referrentur consectetuer. Id vix fabulas oporteat, ei quo vide phaedrum, vim vivendum maiestatis in.</p>
-				<div class="ui divider"></div>
-				<a class="ui teal tag label">Fe</a>
-				<a class="ui teal tag label">Fea</a>
-				<button class="ui blue right floated button ReadMore">阅读更多...</button>
-			</div>
-			<!--article list end-->
+			{% for article in articles %}
+				<!--article list-->
+				<div class="ui piled segment">
+					<h1 class="title"><a href="#">{{article.title}}</a></h1>
+					<h5 class="postTime Time"><i class="calendar icon"></i>{{article.date}}</h5>
+						{{article.summary}}
+					<div class="ui divider"></div>
+					{% for tag in article.tags.split(',') %}
+						<a class="ui teal tag label">{{tag}}</a>
+					{% endfor %}
+					<button class="ui blue right floated button ReadMore">阅读更多...</button>
+				</div>
+				<!--article list end-->
+			{% endfor %}
 
 			<!--paging-->
 
@@ -49,10 +51,12 @@
 				<div class="categoryTitle">
 					<h2><i class="blue remove bookmark icon"></i>分类</h2>
 				</div>
-				<a class="teal item"><b>Inbox</b><span class="ui teal left pointing label">1</span></a>
-				<a class="teal item"><b>Inbox</b><span class="ui teal left pointing label">1</span></a>
-				<a class="teal item"><b>Inbox</b><span class="ui teal left pointing label">1</span></a>
-				<a class="teal item"><b>Inbox</b><span class="ui teal left pointing label">1</span></a>
+				{% for category in categorys %}
+					<a class="teal item">
+						<b>{{category.name}}</b>
+						<span class="ui teal left pointing label">{{category.amount}}</span>
+					</a>
+				{% endfor %}
 			</div>
 		</div>
 		<div class="one wide column"></div>
@@ -65,10 +69,4 @@
 
 
 
-{% block scripts %}
-	<script type="text/javascript">
-		$(document).ready(function(){
-			$('.ui.dropdown.item').dropdown();
-		})
-	</script>
-{% endblock %}
+{% block scripts %}{% endblock %}

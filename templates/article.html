@@ -11,13 +11,13 @@
 		<div class="two wide column"></div>
 		<div class="twelve wide column">
 			<div class="ui raised segment Main">
-				<h1>This is Title</h1>
+				<h1>{{article.title}}</h1>
 				<div class="Info">
-					<span><i class="calendar icon"></i>2017-10-10&nbsp&nbsp</span>
-					<span><i class="unhide icon"></i>10 &nbsp&nbsp</span>
+					<span><i class="calendar icon"></i>{{article.date}}&nbsp&nbsp</span>
+					<span><i class="unhide icon"></i>{{article.read}} &nbsp&nbsp</span>
 					<span><i class="comments outline icon"></i>10</span>
 				</div>
-			  	<p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.</p>
+			  	<p>{{article.content}}</p>
 			  	<div class="ui divider"></div>
 			  	<div class="PageEndButton">
 			  		<button class="ui left floated button"><i class="reply icon"></i>回到主页</button>
@@ -32,7 +32,7 @@
 					        <img src="../static/img/head.jpg">
 					    </a>
 					    <div class="content">
-					        <a class="author">${comment.author}$</a>
+					        <a class="author">${comment.user}$</a>
 					      	<div class="metadata">
 					        	<div class="date">${comment.date}$</div>
 					      	</div>
@@ -58,11 +58,6 @@
 
 
 {% block scripts %}
-	<script type="text/javascript">
-		$(document).ready(function(){
-			$('.ui.dropdown.item').dropdown();
-		})
-	</script>
 	
 	<script type="text/javascript">
 
@@ -71,7 +66,7 @@
 			el: '#comments',
 			data: {
 				newComment:{
-					author: 'new', date: '2017-10-15', content: ''
+					user: 'new', date: '2017-10-15', content: ''
 				},
 			    comments: [],
 			    test: [],
@@ -81,16 +76,30 @@
 					this.newComment.content = '@'+this.comments[index].author
 				},
 				addComment: function(){
-					this.comments.push(this.newComment)
-					this.newComment = {author: 'new', date: '2017-10-15', content: ''}
+					self = this;
+					alert(self.newComment.user);
+					reqwest({
+					    url: '/comments',
+					  	method: 'post',
+					  	data: self.newComment,
+					  	success: function (resp) {
+							self.newComment.id = resp.id
+							self.comments.push(self.newComment)
+							alert(self.newComment.id)
+							self.newComment = {user: 'new', date: '2017-10-15', content: ''}
+
+					    }
+					})
 				},
 				getData: function(){
-					this.comments = [
-						{author: 'zheng1', date: '2017-10-10', content: 'first comment'},
-				    	{author: 'zheng2', date: '2017-10-11', content: 'second comment'},
-				    	{author: 'zheng3', date: '2017-10-12', content: 'third comment'},
-				    	{author: 'zheng4', date: '2017-10-13', content: 'fourth comment'}
-					]
+					self = this
+					reqwest({
+					    url: '/comments',
+					  	method: 'get',
+					  	success: function (resp) {
+							self.comments = resp
+					    }
+					})
 				}
 			},
 			mounted: function(){
