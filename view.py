@@ -1,78 +1,16 @@
 # coding = utf-8
 from flask import Flask, render_template, url_for, jsonify, request
 from flask_restful import reqparse, Api, Resource
+from model import *
 
 
 app = Flask(__name__)
 api = Api(app)
-
-
-
-
-
-articles = [
-		{
-			'id': 1,
-			'title': 'first article',
-			'summary': 'first summary',
-			'content': 'first content',
-			'date': '2010-10-10',
-			'tags': 'first,python',
-			'read': 10
-		},
-		{
-			'id': 2,
-			'title': 'second article',
-			'summary': 'second summary',
-			'content': 'second content',
-			'date': '2010-10-10',
-			'tags': 'first,python',
-			'read': 10
-		},
-		{
-			'id': 3,
-			'title': 'third article',
-			'summary': 'third summary',
-			'content': 'third content',
-			'date': '2010-10-10',
-			'tags': 'first,python',
-			'read': 10
-		}
-	]
-categorys = [
-		{
-			'name': 'python',
-			'amount': 10
-		},
-		{
-			'name': 'vim',
-			'amount': 20
-		},
-		{
-			'name': 'flask',
-			'amount': 8
-		}
-	]
-comments = [
-		{
-			'id': 0,
-			'user': 'zheng',
-			'date': '2012-10-11',
-			'content': 'zheng comment this article'
-		},
-		{
-			'id': 1,
-			'user': 'ang',
-			'date': '2013-6-11',
-			'content': 'ang comment this article'
-		},
-		{
-			'id': 2,
-			'user': 'tmy',
-			'date': '2017-6-5',
-			'content': 'tmy comment this article'
-		}
-	]
+app.secret_key = 'liangchuannan'
+app.config['SQLALCHEMY_DATABASE_URI'] = DB_URI
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+db.init_app(app)
+PER_PAGE = 4
 
 
 @app.route('/')
@@ -82,7 +20,10 @@ def index():
 
 @app.route('/blog')
 def blog():
-    return render_template('blog.html', articles=articles, categorys=categorys)
+    page = request.args.get('page', '1')
+    pagination = Article.query.order_by(Article.date.desc()).paginate(int(page), PER_PAGE, True)
+    categorys = Category.query.all()
+    return render_template('blog.html', pagination=pagination, categorys=categorys)
 
 
 @app.route('/article/<int:id>')
