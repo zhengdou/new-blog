@@ -29,7 +29,7 @@
 			  	<div class="ui comments" id="comments">
 			  		<div class="comment" v-for="(comment, index) in comments">
 					    <a class="avatar">
-					        <img src="../static/img/head.jpg">
+					        <img src="/static/img/head.jpg">
 					    </a>
 					    <div class="content">
 					        <a class="author">${comment.user}$</a>
@@ -77,7 +77,6 @@
 				},
 				addComment: function(){
 					self = this;
-					alert(self.newComment.user);
 					reqwest({
 					    url: '/comments',
 					  	method: 'post',
@@ -85,7 +84,6 @@
 					  	success: function (resp) {
 							self.newComment.id = resp.id
 							self.comments.push(self.newComment)
-							alert(self.newComment.id)
 							self.newComment = {user: 'new', date: '2017-10-15', content: ''}
 
 					    }

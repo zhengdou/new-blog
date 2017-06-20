@@ -22,8 +22,7 @@
 		<!-- header end-->
 
 		<!-- nav -->
-		<div class="ui sticky" id="nav">
-		<div class="ui blue inverted secondary menu Nav">
+		<div class="ui blue inverted secondary menu Nav" id="nav">
 			<a class="active item">Home </a>
   			<a class="item">Messages </a>
   			<a class="item">Friends </a>
@@ -48,7 +47,6 @@
     			</div>
   			</div>
 		</div>
-		</div>
 		<!-- nav end-->
 
 		<!-- main -->
@@ -69,11 +67,10 @@
 		<script type="text/javascript">
 			$(document).ready(function(){
 				$('.ui.dropdown.item').dropdown();
-				$('.ui.sticky').sticky({
-					context: '#nav'
-				});
-			})
-			
+				$('#nav').visibility({
+			        type: 'fixed'
+			    });
+			})	
 		</script>
 		{% block scripts %}{% endblock %}
 	
