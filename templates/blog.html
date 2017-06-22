@@ -14,14 +14,14 @@
 			{% for article in articles %}
 				<!--article list-->
 				<div class="ui piled segment">
-					<h1 class="title"><a href="/article/{{article.id}}">{{article.title}}</a></h1>
+					<h1 class="title"><a href="/article/{{article.title}}">{{article.title}}</a></h1>
 					<h5 class="postTime Time"><i class="calendar icon"></i>{{article.date}}</h5>
 						{{article.summary}}
 					<div class="ui divider"></div>
 					{% for tag in article.tags.split(',') %}
 						<a class="ui teal tag label">{{tag}}</a>
 					{% endfor %}
-					<a class="ui blue large label" style="float: right;" href="/article/{{article.id}}">阅读更多...</a>
+					<a class="ui blue large label" style="float: right;" href="/article/{{article.title}}">阅读更多...</a>
 				</div>
 				<!--article list end-->
 			{% endfor %}

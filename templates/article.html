@@ -17,7 +17,7 @@
 					<span><i class="unhide icon"></i>{{article.read}} &nbsp&nbsp</span>
 					<span><i class="comments outline icon"></i>10</span>
 				</div>
-			  	<p>{{article.content}}</p>
+			  	<p>{{article.html_content|safe}}</p>
 			  	<div class="ui divider"></div>
 			  	<div class="PageEndButton">
 			  		<button class="ui left floated button"><i class="reply icon"></i>回到主页</button>
@@ -33,6 +33,9 @@
 					    </a>
 					    <div class="content">
 					        <a class="author">${comment.user}$</a>
+					        <span v-if="comment.reply_user">回复
+					        	<a class="author">${comment.reply_user}$</a>
+					        </span>
 					      	<div class="metadata">
 					        	<div class="date">${comment.date}$</div>
 					      	</div>
@@ -45,6 +48,10 @@
 					    </div>
 					</div>
 					<form class="ui reply form">
+						<div v-if="newComment.reply_user">
+							<span>回复<a class="author">${newComment.reply_user}$</a></span>
+							<button class="ui blue large right label" v-on:click="cancelReply()">取消</button>
+						</div>
 					    <div class="field" id="newComment">
 					       <textarea v-model="newComment.content"></textarea>
 					    </div>
@@ -65,34 +72,38 @@
 			delimiters: ['${', '}$'],
 			el: '#comments',
 			data: {
+				article_id: '{{article.id}}',
 				newComment:{
-					user: 'new', date: '2017-10-15', content: ''
+					user: 'new', content: '', reply_user: ''
 				},
-			    comments: [],
-			    test: [],
+			    comments: []
 			},
 			methods: {
 				reply: function(index){
-					this.newComment.content = '@'+this.comments[index].author
+					this.newComment.reply_user = this.comments[index].user
 				},
 				addComment: function(){
 					self = this;
 					reqwest({
-					    url: '/comments',
+					    url: '/api/comments?article_id='+self.article_id,
 					  	method: 'post',
 					  	data: self.newComment,
 					  	success: function (resp) {
 							self.newComment.id = resp.id
+							self.newComment.date = resp.date
 							self.comments.push(self.newComment)
-							self.newComment = {user: 'new', date: '2017-10-15', content: ''}
+							self.newComment = {user: 'new', content: '', reply_user: ''}
 
 					    }
 					})
 				},
-				getData: function(){
-					self = this
+				cancelReply: function(){
+					this.newComment.reply_user = '';
+				},
+				getComments: function(){
+					self = this;
 					reqwest({
-					    url: '/comments',
+					    url: '/api/comments?article_id=' + self.article_id,
 					  	method: 'get',
 					  	success: function (resp) {
 							self.comments = resp
@@ -101,7 +112,7 @@
 				}
 			},
 			mounted: function(){
-				this.getData()
+				this.getComments()
 			}
 
 		})
