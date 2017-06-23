@@ -20,8 +20,13 @@
 			  	<p>{{article.html_content|safe}}</p>
 			  	<div class="ui divider"></div>
 			  	<div class="PageEndButton">
-			  		<button class="ui left floated button"><i class="reply icon"></i>回到主页</button>
-			  		<button class="ui right floated button"><i class="share alternate icon"></i>分享</button>
+			  	{% if pre_article %}
+			  		<a class="ui blue large label" href="/article/{{pre_article.title}}">{{pre_article.title}}</a>
+			  	{% endif %}
+
+			  	{% if next_article %}
+			  		<a class="ui blue large label" style="float: right;" href="/article/{{next_article.title}}">{{next_article.title}}</a>
+			  	{% endif %}
 			  	</div>
 			  	
 			</div>
@@ -50,7 +55,7 @@
 					<form class="ui reply form">
 						<div v-if="newComment.reply_user">
 							<span>回复<a class="author">${newComment.reply_user}$</a></span>
-							<button class="ui blue large right label" v-on:click="cancelReply()">取消</button>
+							<button class="ui right floated blue large label" v-on:click="cancelReply()">取消</button>
 						</div>
 					    <div class="field" id="newComment">
 					       <textarea v-model="newComment.content"></textarea>

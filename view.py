@@ -29,9 +29,12 @@ def blog():
 @app.route('/article/<name>')
 def article(name):
 	article = Article.query.filter_by(title=name).first()
+	pre_article = Article.query.filter(Article.id < article.id).order_by(Article.id.desc()).first()
+	next_article = Article.query.filter(Article.id > article.id).first()
 	if not article:
 		return abort(404)
-	return render_template('article.html', article=article)
+	return render_template('article.html', article=article, pre_article=pre_article, 
+			next_article=next_article)
 
 
 class Post(Resource):
